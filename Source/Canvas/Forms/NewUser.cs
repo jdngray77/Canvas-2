@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -38,7 +39,11 @@ namespace Canvas.Forms
             }
 
             string userascii = handler.EncryptUserName(txtusr.Text);
-             Directory.CreateDirectory(Properties.Settings.Default.ApplicationDataLocation + "Users/" + userascii + "/");
+            Directory.CreateDirectory(Properties.Settings.Default.ApplicationDataLocation + "Users/" + userascii + "/Media"); //create the entire user directory.
+
+            Bitmap bmp = new Bitmap(Properties.Resources.Canvas_Logo);
+            bmp.Save(Properties.Settings.Default.ApplicationDataLocation + "Users/" + userascii + "/Media/Canvas project.Jpeg", ImageFormat.Jpeg);
+
 
             //create password, if needed
             if (!txtpass.Text.Equals(""))

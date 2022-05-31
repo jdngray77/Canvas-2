@@ -14,5 +14,11 @@
     <Setting Name="ApplicationDataLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">./</Value>
     </Setting>
+    <Setting Name="CrashOnClose" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CrashProject" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

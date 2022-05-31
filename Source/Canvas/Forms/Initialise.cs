@@ -23,7 +23,25 @@ namespace Canvas.Forms
         Main main = new Main();
         private void Load(object sender, EventArgs e)
         {
+            LogIn log = new LogIn();
+
             timer1.Stop();
+
+            //was last close a crash?
+            if (Properties.Settings.Default.CrashOnClose)
+            {
+                if (Properties.Settings.Default.AutoLogIn)
+                {
+                    if (MessageBox.Show("Canvas crashed the last time it closed. Would you like to log in and reload the last project? A backup copy has been made in ./appdata/crashHandler/backup.Jpeg", "Re load project?", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    {
+                        Properties.Settings.Default.CrashOnClose = false;
+                    }
+                } else
+                {
+                    MessageBox.Show("Canvas crashed the last time it closed, but auto log in is not enabled. For security reason, you will have to reload the project yourself. A backup copy has been made in ./appdata/crashHandler/backup.Jpeg");
+                }
+            }
+
 
             //Is a debugger attached?
             if (Debugger.IsAttached && Properties.Settings.Default.IsInitialised)
@@ -33,9 +51,6 @@ namespace Canvas.Forms
                     main.ResetCanvas();
                 }
             }
-
-
-
 
             //If first time use
             if (!Properties.Settings.Default.IsInitialised)
@@ -68,26 +83,30 @@ namespace Canvas.Forms
                 Properties.Settings.Default.Save();
             }
 
-            if (Properties.Settings.Default.AutoLogIn)
+            if (Properties.Settings.Default.AutoLogIn)//should we auto log in?
             {
-                if (!Properties.Settings.Default.LastUser.Equals("NoUserException"))
+                if (!Properties.Settings.Default.LastUser.Equals("CauseNoUserException"))
                 {
                     this.Hide();
-                    main.LogIn(Properties.Settings.Default.LastUser);
+                    if (Properties.Settings.Default.CrashOnClose == true)
+                    {
+                        main.recover();
+                    } else
+                    { 
+                        main.LogIn(Properties.Settings.Default.LastUser);
+                    }
+
+
+                    
                     return;
                 }
             }
 
+
             //else display login screen
-            LogIn log = new LogIn();
-            this.Hide();
+             this.Hide();
             log.ShowDialog();
             return;
-
-
-
-
-
         }
 
         private void keydown(object sender, KeyEventArgs e)

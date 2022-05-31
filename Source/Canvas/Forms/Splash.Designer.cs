@@ -68,6 +68,7 @@
             this.metroTile2.UseCustomForeColor = true;
             this.metroTile2.UseSelectable = true;
             this.metroTile2.UseTileImage = true;
+            this.metroTile2.Click += new System.EventHandler(this.metroTile2_Click);
             // 
             // TileLogOut
             // 
@@ -135,6 +136,7 @@
             this.Resizable = false;
             this.Text = "Welcome!";
             this.TopMost = true;
+            this.Shown += new System.EventHandler(this.splash_shown);
             this.ResumeLayout(false);
 
         }

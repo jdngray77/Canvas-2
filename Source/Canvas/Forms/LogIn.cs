@@ -65,6 +65,7 @@ namespace Canvas.Forms
 
         }
 
+ 
         NewUser newuser = new NewUser();
         private void metroButton3_Click(object sender, EventArgs e)
         {

@@ -76,8 +76,7 @@ namespace Canvas.Classes
 
         public void LoadUser(string user)
         {
-            userName = user;
-            EncPublicKey = int.Parse(UserKey(user));
+            
         }
 
         private void DecryptUser()
@@ -163,8 +162,12 @@ namespace Canvas.Classes
             Application.Exit();
         }
 
-        private void LogInUser()
+        public void LogInUser(string user)
         {
+            userName = user;
+            EncPublicKey = int.Parse(UserKey(user));
+            Properties.Settings.Default.LastUser = user;
+            Properties.Settings.Default.Save();
             //auto load if previous user has selected to auto load.
             //Settings data will procure auto login bool, the user that last set it, and who was last logged on to validate.
             //Thoese data points should be clearred when another user loggs in to prevent auto log in of an incorrect user.
@@ -174,6 +177,7 @@ namespace Canvas.Classes
         {
             if (username == "") { return false; } //empty is not valid
             if (username.Length < 4) { return false; } //must be longer than four characters
+            if (username == "CauseNoUserException") { return false; }
             
             string usernameAscii = "";
             for (int i = 0; i <= username.Length - 1; i++) //Convert username to ascii id's

@@ -44,13 +44,24 @@ namespace Canvas.Forms
 
         private void metroTile6_Click(object sender, EventArgs e)
         {
-            Settings settings = new Settings();
-            settings.ShowDialog();
+            Option = SplashOption.CanvasSettings;
+            this.Close();
         }
 
         private void close(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void metroTile2_Click(object sender, EventArgs e)
+        {
+            Option = SplashOption.LoadProject;
+            this.Close();
+        }
+
+        private void splash_shown(object sender, EventArgs e)
+        {
+            Option = SplashOption.Nothing;
         }
     }
 }

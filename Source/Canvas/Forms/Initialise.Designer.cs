@@ -56,7 +56,6 @@
             this.KeyPreview = true;
             this.Name = "Initialise";
             this.Text = "Loading";
-            this.TopMost = true;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keydown);
             this.ResumeLayout(false);
 
